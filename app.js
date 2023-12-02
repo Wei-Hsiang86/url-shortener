@@ -42,3 +42,54 @@ app.get("/:id", (req, res) => {
 app.listen(port, () => {
   console.log(`express server is running on http://localhost:${port}`);
 });
+
+// 產生隨機碼
+function randomID() {
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let id = "";
+  for (let i = 0; i < 5; i++) {
+    id += characters[Math.floor(Math.random() * 62)];
+  }
+
+  // 判斷 id 是否重複
+  if (urls.some((url) => url.id === id)) {
+    return randomID();
+  }
+
+  // 無重複則輸出 id
+  return id;
+}
+// console.log(randomID);
+
+// 製造短網址
+function shorten(inputUrl, data) {
+  let urls = data;
+  let id = "";
+  // 如果輸入網址的最後一個字元為斜線，則將其去除
+  if (inputUrl[inputUrl.length - 1] === "/") {
+    inputUrl = inputUrl.slice(0, -1);
+  }
+
+  // 檢查網址是否已存在 urls.json，若有則回傳原先以建立之id
+  if (urls.some((url) => url.orig === inputUrl)) {
+    id = urls.find((url) => url.orig === inputUrl).id;
+  } else {
+    id = randomID();
+    urls.push({
+      id: id,
+      orig: inputUrl,
+    });
+
+    // 將更新的資料寫入 urls.json
+    fs.writeFile(urlsPath, JSON.stringify(urls), function (err) {
+      if (err) {
+        console.log("shorten url written failed");
+        return console.error(err);
+      }
+      console.log("shorten url written successfully");
+    });
+  }
+
+  return `http://localhost:3000/${id}`;
+}
