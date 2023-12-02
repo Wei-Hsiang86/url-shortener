@@ -1,12 +1,4 @@
 [
   { "id": "test1", "orig": "https://www.twitch.tv" },
-  { "id": "test2", "orig": "https://twitter.com" },
-  { "id": "a9Qf2", "orig": "https://mail.google.com/mail/u/0/#inbox" },
-  { "id": "nLLMY", "orig": "https://www.instagram.com/otherstore_art" },
-  { "id": "NiREu", "orig": "https://www.twitch.tv/akamikarubi" },
-  {
-    "id": "nJaYF",
-    "orig": "https://forum.gamer.com.tw/Co.php?bsn=7650&sn=6229463"
-  },
-  { "id": "XdMlT", "orig": "http://localhost:3000/test1" }
+  { "id": "test2", "orig": "https://twitter.com" }
 ]
