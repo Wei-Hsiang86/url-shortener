@@ -10,10 +10,6 @@ app.use(express.static("public"));
 
 //// 設定路由
 app.get("/", (req, res) => {
-  res.redirect("/movies");
-});
-
-app.get("/movies", (req, res) => {
   res.render("index");
 });
 
